@@ -1,204 +1,56 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Klaim Windows Key 10/11 Pro</title>
+    <title>404 - Not Found</title>
     <style>
-        /* Background salju dan tema Natal */
         body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
             margin: 0;
             padding: 0;
-            background: url('https://source.unsplash.com/1600x900/?snow,christmas') no-repeat center center fixed;
-            background-size: cover;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            text-align: center;
-            overflow: hidden;
         }
 
-        /* Container utama */
         .container {
-            background: rgba(0, 0, 0, 0.6);
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
+            margin-top: 10%;
         }
 
-        /* Heading dan subheading */
         h1 {
+            font-size: 80px;
             margin: 0;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px #000;
         }
 
-        h3 {
-            margin-top: 10px;
-            color: #f0e68c;
+        h2 {
+            margin: 10px 0;
         }
 
-        /* Countdown timer */
-        #countdown {
-            font-size: 2.5em;
-            font-weight: bold;
+        img {
+            width: 300px;
             margin: 20px 0;
+            border-radius: 10px;
         }
 
-        /* Efek salju */
-        .snow {
-            position: fixed;
-            top: -10px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: -1;
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 20px;
         }
 
-        /* Doa */
-        .doa {
-            margin-top: 20px;
-            padding: 10px;
-            text-align: left;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            color: #fff;
-            line-height: 1.5;
-        }
-
-        /* Anti Copy Paste dan Screenshot */
-        body {
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* Hilangkan saat cursor tidak di website */
-        body.inactive * {
-            visibility: hidden;
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-<body oncontextmenu="return false" onkeydown="return disableCtrlKey(event)">
-    <!-- Container utama -->
+<body>
     <div class="container">
-        <h1>Event Natal & Tahun Baru</h1>
-        <h3>Klaim Windows Key 10/11 Pro Sekarang!</h3>
-
-        <!-- Key Windows -->
-        <p style="font-size: 1.5em; color: #f0e68c; margin: 20px 0;">
-            Windows 10/11 Pro Key:<br>
-            <strong>Y9CHK-7YDJG-HD7YW-F8T3K-NKXTY</strong>
-        </p>
-        <p style="color: #ffcccb; font-weight: bold;">Note: Khusus Windows 10/11 Pro. Berlaku untuk 100+ PC, segera digunakan sebelum kehabisan.<br>
-        Waktu klaim hanya sampai timer berakhir!</p>
-
-        <!-- Countdown Timer -->
-        <div id="countdown"></div>
-        <p>Waktu tersisa untuk klaim event spesial ini.</p>
-
-    <!-- Salju Efek -->
-    <canvas class="snow" id="snow"></canvas>
-
-    <!-- Script JavaScript -->
-    <script>
-        // Countdown Timer
-        const countdownElement = document.getElementById("countdown");
-        const savedTime = localStorage.getItem("endTime");
-        let endTime;
-
-        if (savedTime) {
-            endTime = new Date(savedTime);
-        } else {
-            endTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 menit dari sekarang
-            localStorage.setItem("endTime", endTime);
-        }
-
-        function updateCountdown() {
-            const now = new Date();
-            const remaining = endTime - now;
-
-            if (remaining <= 0) {
-                countdownElement.innerHTML = "Waktu Habis!";
-                localStorage.removeItem("endTime");
-                return;
-            }
-
-            const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-
-            countdownElement.innerHTML = `${minutes} menit ${seconds} detik`;
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Efek Salju
-        const canvas = document.getElementById("snow");
-        const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particles = [];
-        for (let i = 0; i < 100; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 4 + 1,
-                d: Math.random() * 5
-            });
-        }
-
-        function drawSnow() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#fff";
-            ctx.beginPath();
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                ctx.moveTo(p.x, p.y);
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            }
-            ctx.fill();
-            moveSnow();
-        }
-
-        function moveSnow() {
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                p.y += p.d;
-                if (p.y > canvas.height) {
-                    p.y = 0;
-                    p.x = Math.random() * canvas.width;
-                }
-            }
-        }
-
-        setInterval(drawSnow, 30);
-
-        window.addEventListener("resize", () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Anti Copy-Paste dan Shortcut
-        function disableCtrlKey(e) {
-            const forbiddenKeys = ["c", "v", "x", "u", "p", "s"];
-            if ((e.ctrlKey || e.metaKey) && forbiddenKeys.includes(e.key.toLowerCase())) {
-                alert("Maaf, tindakan ini tidak diperbolehkan!");
-                return false;
-            }
-        }
-
-        // Hilangkan saat cursor tidak di website
-        let body = document.body;
-
-        window.addEventListener('mouseleave', () => {
-            body.classList.add('inactive');
-        });
-
-        window.addEventListener('mouseenter', () => {
-            body.classList.remove('inactive');
-        });
-    </script>
+        <h1>404</h1>
+        <h2>Oops! Halaman tidak ditemukan...</h2>
+        <img src="https://i.imgflip.com/2/2wifvo.jpg" alt="404 Meme">
+        <p>Sepertinya kamu tersesat. Yuk kembali ke halaman utama!</p>
+        <a href="/">Kembali ke Beranda</a>
+    </div>
 </body>
 </html>
