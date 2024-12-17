@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segera Ambil Jangan Terlewat Terbatas Sampai 500 PC untuk Lisensi-nya!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            user-select: none; /* Disable text selection */
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .time-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .license {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #ffea00;
+            font-weight: bold;
+        }
+        #expired {
+            color: #ff4d4d;
+            font-weight: bold;
+            font-size: 20px;
+            display: none;
+        }
+        /* Anti-screenshot */
+        .blurred {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Segera Ambil Jangan Terlewat Terbatas Sampai 500 PC untuk Lisensi-nya!</h1>
+        <p>Gunakan kode lisensi Windows 10/11 Pro sebelum waktu habis!</p>
+        <div class="timer">
+            <div class="time-box" id="days">00 Hari</div>
+            <div class="time-box" id="hours">00 Jam</div>
+            <div class="time-box" id="minutes">00 Menit</div>
+            <div class="time-box" id="seconds">00 Detik</div>
+        </div>
+        <div class="license" id="license">
+            Kode Lisensi: <span>Y9CHK-7YDJG-HD7YW-F8T3K-NKXTY</span>
+        </div>
+        <div id="expired">⏰ Waktu telah habis! Lisensi tidak lagi tersedia.</div>
+    </div>
+
+    <script>
+        // Anti-copy
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('Tindakan menyalin konten tidak diperbolehkan!');
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('Klik kanan tidak diperbolehkan!');
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'a' || e.key === 'x')) {
+                e.preventDefault();
+                alert('Pintasan keyboard tidak diperbolehkan!');
+            }
+        });
+
+        const countdownKey = "countdownEndTime"; // Key untuk localStorage
+        const now = new Date();
+        let endTime = localStorage.getItem(countdownKey);
+
+        if (!endTime) {
+            // Set waktu berakhir 20 menit dari sekarang jika belum disimpan
+            endTime = new Date(now.getTime() + 20 * 60 * 1000).getTime();
+            localStorage.setItem(countdownKey, endTime);
+        }
+
+        function startCountdown() {
+            const timer = setInterval(() => {
+                const currentTime = new Date().getTime();
+                const distance = endTime - currentTime;
+
+                if (distance <= 0) {
+                    clearInterval(timer);
+                    localStorage.removeItem(countdownKey);
+                    document.querySelector(".timer").style.display = "none";
+                    document.getElementById("license").style.display = "none";
+                    document.getElementById("expired").style.display = "block";
+                } else {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("days").innerText = `${days} Hari`;
+                    document.getElementById("hours").innerText = `${hours < 10 ? "0" : ""}${hours} Jam`;
+                    document.getElementById("minutes").innerText = `${minutes < 10 ? "0" : ""}${minutes} Menit`;
+                    document.getElementById("seconds").innerText = `${seconds < 10 ? "0" : ""}${seconds} Detik`;
+                }
+            }, 1000);
+        }
+
+        startCountdown();
+
+        // Anti-screenshot attempt (simulating with blurred content on detection)
+        window.addEventListener("focus", function() {
+            document.body.classList.remove("blurred");
+        });
+
+        window.addEventListener("blur", function() {
+            document.body.classList.add("blurred");
+        });
+    </script>
+</body>
+</html>
